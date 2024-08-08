@@ -1,0 +1,110 @@
+class Solution(object):
+    def merge(self, nums1, m, nums2, n):
+        """
+        :type nums1: List[int]
+        :type m: int
+        :type nums2: List[int]
+        :type n: int
+        :rtype: None Do not return anything, modify nums1 in-place instead.
+        """
+        
+        
+        # nums1[m:] = nums2
+        # # min from temp list "works"
+        # temp_list = nums1.copy()
+        # for i in range(len(nums1)):
+        #     nums1[i] = temp_list.pop(min(range(len(temp_list)), key=temp_list.__getitem__))
+            
+        # same idea as above both are blocked... both work
+        # nums1[m:] = nums2
+        # ordered_list = []
+        # for i in range(m+n):
+        #     ordered_list.append(min(nums1))
+        #     nums1.pop(min(range(len(nums1)), key=nums1.__getitem__))
+        # nums1 = ordered_list
+        
+        nums1[m:] = nums2
+        size = m+n-1
+        # place min and max at begining and end ...? or just find min and max?
+        # nums1[0] = min(nums1)
+        # single for loop
+        for i, n1 in enumerate(nums1):
+            low = min(nums1[i:])
+            print(nums1[i:])
+            if n1 == low:
+                pass
+            elif n1 > low: # dont know if this is nessasary "and i != size"
+                low_idx = nums1[i:].index(low)
+                nums1[low_idx+i] = n1
+                nums1[i] = low
+                
+            # for j, n2 in enumerate(nums1):
+            #     if n1 > n2:
+            #         if j+1 < len(nums1):
+            #             nums1[i] = n2
+            #             nums1[j+1] = n1
+            #         else:
+            #             pass
+
+                
+                 
+                
+        # i = 0
+        # while (i+1) < len(nums1): # may need <=
+        #     temp_A = nums1[i]
+        #     if nums1[i+1] < temp_A:
+        #         #swap untill we encounter a lower number or the begining of the list
+        #         nums1[i] = nums1[i+1]
+        #         nums1[i+1] = temp_A
+        #         if i > 0:
+        #             if nums1[i-1] < temp_A:
+        #                 i -= 1              
+        #     else:
+        #         i += 1
+
+# main
+def main():
+    solution = Solution()
+# case 1
+    # nums1 = [1,2,3,0,0,0]
+    # m = 3
+    # nums2 = [2,5,6]
+    # n = 3
+
+    # solution.merge(nums1, m, nums2, n)
+    # print(nums1)
+
+# # case 2
+#     nums1 = [1]
+#     m = 1
+#     nums2 = []
+#     n = 0
+#     solution.merge(nums1, m, nums2, n)
+#     print(nums1)
+    
+# case 3
+    # nums1 = [0]
+    # m = 0
+    # nums2 = [1]
+    # n = 1
+    # solution.merge(nums1, m, nums2, n)
+    # print(nums1)
+    
+# case 4
+    nums1 = [-1,0,0,3,3,3,0,0,0]
+    m = 6
+    nums2 = [1,2,2]
+    n = 3
+    solution.merge(nums1, m, nums2, n)
+    print(nums1)
+# case 5
+    nums1 = [2,0]
+    m = 1
+    nums2 = [1]
+    n = 1
+    solution.merge(nums1, m, nums2, n)
+    print(nums1)
+    
+    
+if __name__ == '__main__':
+    main()
